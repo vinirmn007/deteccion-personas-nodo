@@ -1,0 +1,59 @@
+# --- Python Specific ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Virtual Environments ---
+.venv/
+venv/
+env/
+ENV/
+pyvenv.cfg
+.env
+.venv
+
+# --- IDEs/Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints
+
+# Exclude YOLO training runs / outputs
+runs/
+
+# --- CLI, System & OS specific ---
+.antigravitycli/
+.agents/
+.DS_Store
+Thumbs.db
+
+# --- Custom Ignored Directories ---
+# Ignore samples folder
+muestras/
+
+# Ignore all model files except v8.onnx and model_v8.onnx
+models/*
+!models/v8.onnx
+!models/model_v8.onnx
