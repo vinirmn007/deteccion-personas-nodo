@@ -21,7 +21,7 @@ def train_yolo():
 
     rf = Roboflow(api_key="k1lfw5vNH559hQizTZot")
     project = rf.workspace("alexiss-workspace-sentr").project("proyectonodo")
-    version = project.version(6)
+    version = project.version(7)
     dataset = version.download("yolo26")
     
     dataset_yaml = f"{dataset.location}/data.yaml"
@@ -31,11 +31,11 @@ def train_yolo():
 
     model.train(
         data=dataset_yaml,
-        epochs=100,
+        epochs=150,
         batch=16,
         imgsz=640,
         project=output_dir,
-        name='modelo_v8',
+        name='modelo_v8.2',
         device=0
     )
 

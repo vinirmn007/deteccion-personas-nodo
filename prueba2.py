@@ -71,7 +71,7 @@ def seleccionar_zona(frame, nombre_zona, color):
 
 
 # MODELO
-model = YOLO("models/model_v8.onnx")
+model = YOLO("models/model_v8.2.onnx")
 
 cap = cv2.VideoCapture("muestras/video6.mp4")  # Cambia a 0 para usar la webcam
 
@@ -129,15 +129,21 @@ print("\nProcesando video... Presiona 'q' para salir.\n")
 cv2.namedWindow("Conteo en Autobus", cv2.WINDOW_NORMAL)
 cv2.resizeWindow("Conteo en Autobus", 1280, 720)
 
+frame_count = 0
+frame_skip = 2  # Procesar 1 de cada 2 frames
+
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
         break
 
+    frame_count += 1
+    if frame_count % frame_skip != 0:
+        continue
+
     #RESULTADOS DE LA DETECCION
     #results = model.track(frame, persist=True, tracker="bytetrack.yaml", imgsz=640, verbose=False, conf=0.5)[0]
-    results = model.track(frame, persist=True, tracker="bytetrack.yaml", imgsz=640, verbose=False, conf=0.4)[0]
-
+    results = model.track(frame, persist=True, tracker="custom_botsort.yaml", imgsz=640, verbose=False, conf=0.35)[0]
 
     #CONVERTIR A FORMATO DE SUPERVISON
     detections = sv.Detections.from_ultralytics(results)

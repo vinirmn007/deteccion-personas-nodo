@@ -3,7 +3,7 @@ from ultralytics import YOLO
 def export_to_onnx():
     print("Cargando el modelo PyTorch...")
     # Asegúrate de que la ruta al modelo sea la correcta
-    model = YOLO("models/model_v8.pt")
+    model = YOLO("models/model_v8.2.pt")
     model.eval()  # Establecer el modelo en modo evaluación
 
     print("Iniciando exportación a ONNX...")
