@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 import supervision as sv
+import argparse
 
 # Diccionario con la configuración de las zonas y rutas de video
 configuraciones = {
@@ -20,7 +21,12 @@ configuraciones = {
 print("=" * 50)
 print("  SELECCION DE VIDEO Y ZONAS")
 print("=" * 50)
-opcion = input("Seleccione el video a procesar (5 o 6): ").strip()
+parser = argparse.ArgumentParser(description="Conteo de personas en buses.")
+parser.add_argument("--video", type=str, choices=["5", "6"], default="5", help="Video a procesar (5 o 6)")
+parser.add_argument("--headless", action="store_true", help="Ejecutar sin interfaz gráfica (ideal para Jetson Nano)")
+args = parser.parse_args()
+
+opcion = args.video
 
 if opcion not in configuraciones:
     print("Opción no válida. Saliendo...")
@@ -58,11 +64,12 @@ track_states = {}
 entradas = 0
 salidas = 0
 
-print("\nProcesando video... Presiona 'q' para salir.\n")
+print("\nProcesando video... Presiona 'q' para salir (Ctrl+C en headless).\n")
 
-# Crear ventana redimensionable que se ajusta a la pantalla
-cv2.namedWindow("Conteo en Autobus", cv2.WINDOW_NORMAL)
-cv2.resizeWindow("Conteo en Autobus", 1280, 720)
+if not args.headless:
+    # Crear ventana redimensionable que se ajusta a la pantalla
+    cv2.namedWindow("Conteo en Autobus", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Conteo en Autobus", 1280, 720)
 
 frame_count = 0
 frame_skip = 2  # Procesar 1 de cada 2 frames
@@ -136,13 +143,14 @@ while cap.isOpened():
     cv2.putText(frame, f"Inferencia: {infer_time:.1f} ms", (20, 120), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
     cv2.putText(frame, f"FPS Modelo: {fps:.1f}", (20, 150), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
 
-    cv2.imshow("Conteo en Autobus", frame)
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    if not args.headless:
+        cv2.imshow("Conteo en Autobus", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 cap.release()
-cv2.destroyAllWindows()
+if not args.headless:
+    cv2.destroyAllWindows()
 
 # Mostrar resultado final
 print(f"\n{'=' * 50}")
