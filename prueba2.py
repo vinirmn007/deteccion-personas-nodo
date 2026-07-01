@@ -73,7 +73,7 @@ def seleccionar_zona(frame, nombre_zona, color):
 # MODELO
 model = YOLO("models/model_v8.2.onnx")
 
-cap = cv2.VideoCapture("muestras/video6.mp4")  # Cambia a 0 para usar la webcam
+cap = cv2.VideoCapture("muestras/video5.mp4")  # Cambia a 0 para usar la webcam
 
 ret, primer_frame = cap.read()
 if not ret:
