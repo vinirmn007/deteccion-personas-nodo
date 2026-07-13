@@ -15,6 +15,11 @@ configuraciones = {
         "video_path": "muestras/video6.mp4",
         "zona_a": [[795, 5], [801, 789], [447, 1062], [10, 1055], [4, 3]],
         "zona_b": [[812, 3], [846, 792], [576, 1047], [1904, 1055], [1904, 10]]
+    },
+    "7": {
+        "video_path": "muestras/video7.dav",
+        "zona_a": [[1714, 382], [2542, 55], [2536, 1411], [10, 1411], [4, 131], [774, 388]],
+        "zona_b": [[1676, 364], [2542, 40], [2542, 7], [6, 0], [8, 118], [910, 359]]
     }
 }
 
@@ -22,7 +27,7 @@ print("=" * 50)
 print("  SELECCION DE VIDEO Y ZONAS")
 print("=" * 50)
 parser = argparse.ArgumentParser(description="Conteo de personas en buses.")
-parser.add_argument("--video", type=str, choices=["5", "6"], default="5", help="Video a procesar (5 o 6)")
+parser.add_argument("--video", type=str, choices=["5", "6", "7"], default="5", help="Video a procesar (5, 6 o 7)")
 parser.add_argument("--headless", action="store_true", help="Ejecutar sin interfaz gráfica (ideal para Jetson Nano)")
 args = parser.parse_args()
 
