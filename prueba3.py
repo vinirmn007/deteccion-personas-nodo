@@ -88,6 +88,14 @@ while cap.isOpened():
     if frame_count % frame_skip != 0:
         continue
 
+    # APLICAR CLAHE (Mejora de contraste para zonas oscuras)
+    lab = cv2.cvtColor(frame, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+    clahe = cv2.createCLAHE(clipLimit=2.5, tileGridSize=(8,8))
+    cl = clahe.apply(l)
+    limg = cv2.merge((cl,a,b))
+    frame = cv2.cvtColor(limg, cv2.COLOR_LAB2BGR)
+
     # RESULTADOS DE LA DETECCION
     results = model.track(frame, persist=True, tracker="custom_botsort.yaml", imgsz=640, verbose=False, conf=0.35)[0]
 
