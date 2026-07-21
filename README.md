@@ -1,6 +1,6 @@
-# Detección y Conteo de Personas en Autobuses (YOLOv8 + Supervision + Tracking)
+# Detección y Conteo de Personas en Autobuses (YOLO v26 Nano + Supervision + Tracking)
 
-Este proyecto implementa un sistema automatizado de conteo de pasajeros (entradas y salidas) en autobuses utilizando modelos de visión por computador basado en **YOLOv8**, la librería **Supervision** de Roboflow y rastreo multiobjeto (**BoT-SORT** / **ByteTrack**).
+Este proyecto implementa un sistema automatizado de conteo de pasajeros (entradas y salidas) en autobuses utilizando modelos de visión por computador basado en **YOLO v26 Nano**, la librería **Supervision** de Roboflow y rastreo multiobjeto (**BoT-SORT** / **ByteTrack**).
 
 Está diseñado y optimizado para ejecutarse tanto en entornos de desarrollo (PC/Laptop) como en dispositivos embebidos de alto rendimiento (**NVIDIA Jetson Nano**).
 
@@ -24,7 +24,11 @@ cd prueba1_yolov26
   ```
 
 * **En NVIDIA Jetson (Jetson Nano / Xavier / Orin):**
-  > 📌 **Nota para Jetson:** Existe un archivo de dependencias compilado específicamente para la arquitectura y entorno de la Jetson (con soporte PyTorch/Torchvision acelerados por CUDA para JetPack). Este archivo se encuentra almacenado directamente en la Jetson para su importación e instalación local.
+  Instala las dependencias específicas directamente desde el archivo preconfigurado en el repositorio:
+  ```bash
+  pip install -r requirements-jetson.txt
+  ```
+  > 📌 **Nota para Jetson:** El archivo [requirements-jetson.txt](file:///d:/prueba1_yolov26/requirements-jetson.txt) ya está incluido en el repositorio con las versiones exactas para la arquitectura ARM y el entorno JetPack de NVIDIA Jetson.
 
 ### 3. Descargar Videos de Muestra
 El proyecto incluye un script automatizado para descargar los videos de prueba almacenados en Google Drive hacia la carpeta local `muestras/`:
