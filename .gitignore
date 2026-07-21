@@ -49,11 +49,14 @@ runs/
 .DS_Store
 Thumbs.db
 
-# --- Custom Ignored Directories ---
+# --- Custom Ignored Directories and Files ---
 # Ignore samples folder
 muestras/
 
-# Ignore all model files except v8.onnx and model_v8.onnx
-models/*
-!models/v8.onnx
-!models/model_v8.onnx
+# Ignore models directory
+models/
+
+# Ignore legacy train and deploy scripts
+train*.py
+deploy.py
+
