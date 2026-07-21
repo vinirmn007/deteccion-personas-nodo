@@ -29,15 +29,15 @@ def download_folder():
     
     print(f"Descargando contenido en la carpeta '{output_dir}/'...")
     try:
-        # Intentar descargar usando la URL del folder
-        gdown.download_folder(url=folder_url, output=output_dir, quiet=False)
+        # Intentar descargar usando la URL del folder (resume=True omite archivos ya descargados)
+        gdown.download_folder(url=folder_url, output=output_dir, quiet=False, resume=True)
         print("\n¡Descarga finalizada con éxito!")
     except Exception as e:
         print(f"\nHubo un problema descargando usando la URL completa: {e}")
         print("Intentando descargar usando directamente el ID del folder...")
         try:
             folder_id = "1ycpz1A1IrL5ap5yFRZ-cYvIBHrPsqhUJ"
-            gdown.download_folder(id=folder_id, output=output_dir, quiet=False)
+            gdown.download_folder(id=folder_id, output=output_dir, quiet=False, resume=True)
             print("\n¡Descarga finalizada con éxito usando el ID del folder!")
         except Exception as e_id:
             print(f"\nError al intentar descargar con el ID del folder: {e_id}")
