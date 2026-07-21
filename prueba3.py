@@ -3,23 +3,29 @@ import numpy as np
 from ultralytics import YOLO
 import supervision as sv
 import argparse
+import os
 
 # Diccionario con la configuración de las zonas y rutas de video
 configuraciones = {
-    "5": {
-        "video_path": "muestras/video5.mp4",
+    "1": {
+        "video_path": "muestras/video1.mp4" if os.path.exists("muestras/video1.mp4") else "muestras/video1.webm",
         "zona_a": [[1264, 323], [1906, 173], [1900, 1055], [8, 1058], [9, 223], [628, 333]],
         "zona_b": [[1262, 293], [1906, 50], [1905, 0], [4, 5], [8, 102], [648, 303]]
     },
-    "6": {
-        "video_path": "muestras/video6.mp4",
+    "2": {
+        "video_path": "muestras/video2.mp4",
         "zona_a": [[795, 5], [801, 789], [447, 1062], [10, 1055], [4, 3]],
         "zona_b": [[812, 3], [846, 792], [576, 1047], [1904, 1055], [1904, 10]]
     },
-    "7": {
-        "video_path": "muestras/video7.dav",
+    "3": {
+        "video_path": "muestras/video3.mp4" if os.path.exists("muestras/video3.mp4") else "muestras/video7.dav",
         "zona_a": [[1714, 382], [2542, 55], [2536, 1411], [10, 1411], [4, 131], [774, 388]],
         "zona_b": [[1676, 364], [2542, 40], [2542, 7], [6, 0], [8, 118], [910, 359]]
+    },
+    "4": {
+        "video_path": "muestras/video4.mp4",
+        "zona_a": [[1704, 473], [2554, 333], [2558, 1438], [9, 1427], [29, 196], [921, 459]],
+        "zona_b": [[1660, 401], [2526, 101], [2556, 5], [12, 9], [12, 133], [892, 403]]
     }
 }
 
@@ -27,7 +33,7 @@ print("=" * 50)
 print("  SELECCION DE VIDEO Y ZONAS")
 print("=" * 50)
 parser = argparse.ArgumentParser(description="Conteo de personas en buses.")
-parser.add_argument("--video", type=str, choices=["5", "6", "7"], default="5", help="Video a procesar (5, 6 o 7)")
+parser.add_argument("--video", type=str, choices=["1", "2", "3", "4"], default="1", help="Video a procesar (1, 2, 3 o 4)")
 parser.add_argument("--headless", action="store_true", help="Ejecutar sin interfaz gráfica (ideal para Jetson Nano)")
 args = parser.parse_args()
 
