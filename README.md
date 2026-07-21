@@ -49,18 +49,22 @@ En esta prueba puedes **dibujar las zonas de conteo de forma interactiva con el 
   * **Esc:** Cancelar.
   *(Primero se dibuja la ZONA A - Adentro del bus, y luego la ZONA B - Puerta/Escalones).*
 
-* **¿Cómo cambiar el video en `prueba2.py`?**
-  Abre el archivo [prueba2.py](file:///d:/prueba1_yolov26/prueba2.py) y modifica la línea 76:
+* **¿Cómo cambiar el modelo y el video en `prueba2.py`?**
+  Abre el archivo [prueba2.py](file:///d:/prueba1_yolov26/prueba2.py) y ajusta las variables del modelo o captura:
   ```python
-  # Línea 76 de prueba2.py:
-  cap = cv2.VideoCapture("muestras/video5.mp4")  # Cambia la ruta o coloca 0 para usar webcam
+  # Línea 74: Modelo cargado (ubicado en la subcarpeta de engines)
+  model = YOLO("models/engine/model_v9s.engine")
+
+  # Línea 76: Video de entrada
+  cap = cv2.VideoCapture("muestras/video6.mp4")  # Cambia la ruta o coloca 0 para usar webcam
   ```
 
 ---
 
 ### ⚙️ Prueba 3 (`prueba3.py`): Zonas Pre-anotadas y Selección por Argumentos
 
-En esta prueba las zonas ya están **pre-anotadas y calibradas** en el código (dentro del diccionario `configuraciones`). Puedes elegir qué video procesar directamente desde la terminal.
+En esta prueba las zonas ya están **pre-anotadas y calibradas** en el código (dentro del diccionario `configuraciones`). Actualmente está configurado para cargar el modelo de motor optimizado:
+`model = YOLO("models/engine/model_v9.2n.engine")`.
 
 * **Sintaxis de ejecución:**
   ```bash
@@ -81,7 +85,14 @@ En esta prueba las zonas ya están **pre-anotadas y calibradas** en el código (
 
 ---
 
-## ⚡ Formatos de Modelo: PyTorch (`.pt`), ONNX (`.onnx`) y TensorRT (`.engine`)
+## 📁 Estructura de la Carpeta `models/` y Formatos
+
+Los modelos se organizan por subcarpetas según su formato y propósito:
+
+* **`models/pt/`**: Modelos originales o recién entrenados en formato PyTorch (`.pt`).
+* **`models/onnx/`**: Modelos exportados a formato estándar de intercambio ONNX (`.onnx`).
+* **`models/engine/`**: Motores compilados e hiper-optimizados con TensorRT (`.engine`) para inferencia ultrarrápida en la NVIDIA Jetson.
+* **`models/pruebas/`**: Modelos temporales o en fase de pruebas locales (ignorado en el `.gitignore`).
 
 ### ¿Qué es ONNX y TensorRT Engine?
 
