@@ -54,7 +54,7 @@ Thumbs.db
 muestras/
 
 # Ignore models directory
-models/
+models/pruebas
 
 # Ignore legacy train and deploy scripts
 train*.py

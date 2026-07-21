@@ -18,12 +18,12 @@ configuraciones = {
         "zona_b": [[812, 3], [846, 792], [576, 1047], [1904, 1055], [1904, 10]]
     },
     "3": {
-        "video_path": "muestras/video3.mp4" if os.path.exists("muestras/video3.mp4") else "muestras/video7.dav",
+        "video_path": "muestras/video3.mp4" if os.path.exists("muestras/video3.dav") else "muestras/video7.dav",
         "zona_a": [[1714, 382], [2542, 55], [2536, 1411], [10, 1411], [4, 131], [774, 388]],
         "zona_b": [[1676, 364], [2542, 40], [2542, 7], [6, 0], [8, 118], [910, 359]]
     },
     "4": {
-        "video_path": "muestras/video4.mp4",
+        "video_path": "muestras/video4.dav",
         "zona_a": [[1704, 473], [2554, 333], [2558, 1438], [9, 1427], [29, 196], [921, 459]],
         "zona_b": [[1660, 401], [2526, 101], [2556, 5], [12, 9], [12, 133], [892, 403]]
     }
@@ -53,7 +53,7 @@ print(f"Zona A definida con {len(polygon_a)} puntos")
 print(f"Zona B definida con {len(polygon_b)} puntos")
 
 # MODELO
-model = YOLO("models/model_v8.2.onnx")
+model = YOLO("models/engine/model_v9.2n.engine")
 
 cap = cv2.VideoCapture(video_path)
 
@@ -93,15 +93,7 @@ while cap.isOpened():
     frame_count += 1
     if frame_count % frame_skip != 0:
         continue
-
-    # APLICAR CLAHE (Mejora de contraste para zonas oscuras)
-    lab = cv2.cvtColor(frame, cv2.COLOR_BGR2LAB)
-    l, a, b = cv2.split(lab)
-    clahe = cv2.createCLAHE(clipLimit=2.5, tileGridSize=(8,8))
-    cl = clahe.apply(l)
-    limg = cv2.merge((cl,a,b))
-    frame = cv2.cvtColor(limg, cv2.COLOR_LAB2BGR)
-
+        
     # RESULTADOS DE LA DETECCION
     results = model.track(frame, persist=True, tracker="custom_botsort.yaml", imgsz=640, verbose=False, conf=0.35)[0]
 
