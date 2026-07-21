@@ -12,7 +12,7 @@ Sigue esta secuencia paso a paso para clonar el repositorio, preparar el entorno
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/vinirmn007/deteccion-personas-nodo
 cd prueba1_yolov26
 ```
 
@@ -92,7 +92,6 @@ Los modelos se organizan por subcarpetas según su formato y propósito:
 * **`models/pt/`**: Modelos originales o recién entrenados en formato PyTorch (`.pt`).
 * **`models/onnx/`**: Modelos exportados a formato estándar de intercambio ONNX (`.onnx`).
 * **`models/engine/`**: Motores compilados e hiper-optimizados con TensorRT (`.engine`) para inferencia ultrarrápida en la NVIDIA Jetson.
-* **`models/pruebas/`**: Modelos temporales o en fase de pruebas locales (ignorado en el `.gitignore`).
 
 ### ¿Qué es ONNX y TensorRT Engine?
 
@@ -109,8 +108,7 @@ Si entrenas o actualizas un modelo PyTorch (`.pt`) y necesitas convertirlo para 
    ```
 2. **Exportar a TensorRT / ONNX optimizado:**
    ```bash
-   python export_tensorrt.py          # Para conversión directa a TensorRT (requiere GPU NVIDIA)
-   python export_tensorrt.py --onnx   # Exporta ONNX optimizado para llevar a la Jetson Nano
+   python exportRT.py          # Para conversión directa a TensorRT (requiere GPU NVIDIA)
    ```
 
 ### 🏎️ ¿Por qué se utiliza `.engine` en NVIDIA Jetson?
@@ -133,7 +131,3 @@ El sistema utiliza algoritmos de rastreo multiobjeto para mantener la identidad 
   Si se requiere, se puede cambiar el rastreador a ByteTrack modificando la llamada de rastreo en el modelo a `tracker="bytetrack.yaml"`.
 
 ---
-
-## ⚠️ Scripts Obsoletos (`train.py` y `deploy.py`)
-
-> ℹ️ **Nota:** Los archivos `train.py` y `deploy.py` corresponden a versiones previas de pruebas de entrenamiento y despliegue. No requieren configuración ni uso, ya que están marcados para ser descontinuados o eliminados del proyecto.
